@@ -25,7 +25,6 @@ function App() {
     ).catch((err) => console.error(err));
 
     const result = await apiResults.json();
-    console.log("NEW >>", result);
 
     setSearchResults(result);
   };
