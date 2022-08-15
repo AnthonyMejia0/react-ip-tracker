@@ -10,18 +10,6 @@ function App() {
   const regexExpIP =
     /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/gi;
 
-  //https://geo.ipify.org/api/v2/country,city?apiKey=at_aadMVWGiOIHMot4vqkI8hdAjtx5Jw&ipAddress=8.8.8.8
-  // const fetchLocationData2 = async () => {
-  //   await fetch(
-  //     `${API_URL}?apiKey=${API_KEY}&ipAdress=8.8.8.8`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setSearchResults(data);
-  //       console.log("RESULTS >>", searchResults);
-  //     });
-  // };
-
   const fetchLocationData = async () => {
     const apiResults = await fetch(
       `${API_URL}?apiKey=${API_KEY}&${
@@ -49,7 +37,7 @@ function App() {
       );
 
       const result = await apiResults.json();
-      //console.log("NEW >>", result);
+
       setSearchResults(result);
     };
     fetchInitialData();
