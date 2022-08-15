@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useEffect, useState } from "react";
 import Arrow from "./images/icon-arrow.svg";
 import abbrState from "./lib/abbreviateState";
@@ -23,7 +22,7 @@ function App() {
   //     });
   // };
 
-  const fetchLocationData = useCallback(async () => {
+  const fetchLocationData = async () => {
     const apiResults = await fetch(
       `${API_URL}?apiKey=${API_KEY}&${
         regexExpIP.test(search) ? "ipAddress" : "domain"
@@ -34,7 +33,7 @@ function App() {
     console.log("NEW >>", result);
 
     setSearchResults(result);
-  }, [search]);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,8 +43,17 @@ function App() {
   };
 
   useEffect(() => {
-    fetchLocationData();
-  }, [fetchLocationData]);
+    const fetchInitialData = async () => {
+      const apiResults = await fetch(`${API_URL}?apiKey=${API_KEY}`).catch(
+        (err) => console.error(err)
+      );
+
+      const result = await apiResults.json();
+      //console.log("NEW >>", result);
+      setSearchResults(result);
+    };
+    fetchInitialData();
+  }, []);
 
   return (
     <div className="relative overflow-scroll lg:bg-[url(./images/pattern-bg.png)] bg-gray-300 h-screen w-screen bg-no-repeat md:bg-contain">
